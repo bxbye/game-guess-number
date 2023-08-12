@@ -20,15 +20,20 @@ class GuessingGame:
     def check_guess(self, guess):
         self.attempts.append(guess)
         if guess == self.target_number:
-            print("Correct, you won!")
             self.flag = True
+            print("Correct, you won!")
+            message = "Correct, you won!"
         elif guess > self.target_number and len(self.attempts) < self.attempt_limit:
             print(f"the number is lower then {guess}")
+            message = f"The number is lower then {guess}"
         elif guess < self.target_number and len(self.attempts) < self.attempt_limit:
             print(f"the number is higher then {guess}")
+            message = f"the number is higher then {guess}"
         else:
+            self.flag = False
             print(f"You lost! You've used your {self.attempt_limit} guess attempt.")
-            self.flag = False         
+            message = f"You lost! You've used your {self.attempt_limit} guess attempt."
+        return message      
     # player has limited guess. game will be ended when its true or has no attempt limit
     def end_condition(self):
         if self.flag or (self.flag == False and len(self.attempts) >= self.attempt_limit):
